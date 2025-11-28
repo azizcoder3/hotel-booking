@@ -104,11 +104,12 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Carte Chambre 1 (Static pour l'instant) */}
+            
+            {/* Carte 1 : Suite Deluxe */}
             <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
               <div className="relative h-64 overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?q=80&w=2070&auto=format&fit=crop"
+                  src="/images/rooms/suite-deluxe-main.jpeg" // Utilise ton image locale si possible, sinon garde l'ancienne
                   alt="Suite Deluxe"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -117,7 +118,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">Suite Deluxe</h3>
+                    <h3 className="text-xl font-bold text-gray-900">Suite Deluxe Océan</h3>
                     <div className="flex items-center mt-1">
                       <Star className="w-4 h-4 text-yellow-400 fill-current" />
                       <span className="text-sm text-gray-500 ml-1">4.9 (120 avis)</span>
@@ -128,17 +129,18 @@ export default function Home() {
                 <p className="text-gray-600 text-sm mb-6 line-clamp-2">
                   Une suite spacieuse avec vue sur l&apos;océan, lit King Size et salle de bain en marbre.
                 </p>
-                <Link href="/rooms" className="block w-full py-3 text-center border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-colors">
+                {/* CORRECTION ICI 👇 */}
+                <Link href="/rooms/suite-deluxe-ocean" className="block w-full py-3 text-center border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-colors">
                   Réserver
                 </Link>
               </div>
             </div>
 
-            {/* Carte Chambre 2 */}
+            {/* Carte 2 : Chambre Double */}
             <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
               <div className="relative h-64 overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=2070&auto=format&fit=crop"
+                  src="/images/rooms/double-urbaine-main.jpg"
                   alt="Chambre Double"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -158,17 +160,18 @@ export default function Home() {
                 <p className="text-gray-600 text-sm mb-6 line-clamp-2">
                   Parfaite pour les couples, avec tout le confort nécessaire et un balcon privé.
                 </p>
-                <Link href="/rooms" className="block w-full py-3 text-center border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-colors">
+                {/* CORRECTION ICI 👇 */}
+                <Link href="/rooms/chambre-double-confort" className="block w-full py-3 text-center border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-colors">
                   Réserver
                 </Link>
               </div>
             </div>
 
-            {/* Carte Chambre 3 */}
+            {/* Carte 3 : Penthouse */}
             <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
               <div className="relative h-64 overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=2070&auto=format&fit=crop"
+                  src="/images/rooms/penthouse-main.jpg"
                   alt="Penthouse"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -177,7 +180,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">Penthouse</h3>
+                    <h3 className="text-xl font-bold text-gray-900">Penthouse Royal</h3>
                     <div className="flex items-center mt-1">
                       <Star className="w-4 h-4 text-yellow-400 fill-current" />
                       <span className="text-sm text-gray-500 ml-1">5.0 (24 avis)</span>
@@ -188,11 +191,13 @@ export default function Home() {
                 <p className="text-gray-600 text-sm mb-6 line-clamp-2">
                   L&apos;expérience ultime. Dernier étage, terrasse panoramique et jacuzzi privé.
                 </p>
-                <Link href="/rooms" className="block w-full py-3 text-center border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-colors">
+                {/* CORRECTION ICI 👇 */}
+                <Link href="/rooms/penthouse-hotel-luxe" className="block w-full py-3 text-center border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-colors">
                   Réserver
                 </Link>
               </div>
             </div>
+
           </div>
           
           <div className="mt-12 text-center md:hidden">
@@ -202,6 +207,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      
 
         {/* 3. NOUVELLE SECTION : SLIDER SERVICES */}
       <section>
