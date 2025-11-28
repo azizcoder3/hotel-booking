@@ -140,7 +140,7 @@ export default function Home() {
             <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
               <div className="relative h-64 overflow-hidden">
                 <Image
-                  src="/images/rooms/double-urbaine-main.jpg"
+                  src="/images/rooms/double-urbaine-main.jpeg"
                   alt="Chambre Double"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -171,7 +171,7 @@ export default function Home() {
             <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
               <div className="relative h-64 overflow-hidden">
                 <Image
-                  src="/images/rooms/penthouse-main.jpg"
+                  src="/images/rooms/penthouse-main.jpeg"
                   alt="Penthouse"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"

@@ -12,7 +12,7 @@ export async function signup(formData: FormData) {
   const fullName = formData.get('fullName') as string
 
   // 1. Création du compte dans Supabase Auth
-  const { data, error } = await supabase.auth.signUp({
+  const { error } = await supabase.auth.signUp({
     email,
     password,
     options: {
