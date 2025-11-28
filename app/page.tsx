@@ -140,7 +140,7 @@ export default function Home() {
             <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
               <div className="relative h-64 overflow-hidden">
                 <Image
-                  src="/images/rooms/double-urbaine-main.jpeg"
+                  src="/rooms/double-urbaine-main.jpeg"
                   alt="Chambre Double"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -149,7 +149,7 @@ export default function Home() {
               <div className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div>
-                    <h3 className="text-xl font-bold text-gray-900">Chambre Double</h3>
+                    <h3 className="text-xl font-bold text-gray-900">Chambre Double Urbaine</h3>
                     <div className="flex items-center mt-1">
                       <Star className="w-4 h-4 text-yellow-400 fill-current" />
                       <span className="text-sm text-gray-500 ml-1">4.7 (85 avis)</span>
@@ -161,7 +161,7 @@ export default function Home() {
                   Parfaite pour les couples, avec tout le confort nécessaire et un balcon privé.
                 </p>
                 {/* CORRECTION ICI 👇 */}
-                <Link href="/rooms/chambre-double-confort" className="block w-full py-3 text-center border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-colors">
+                <Link href="/rooms/chambre-double-urbaine" className="block w-full py-3 text-center border border-indigo-600 text-indigo-600 font-semibold rounded-lg hover:bg-indigo-600 hover:text-white transition-colors">
                   Réserver
                 </Link>
               </div>
@@ -171,7 +171,7 @@ export default function Home() {
             <div className="group bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300">
               <div className="relative h-64 overflow-hidden">
                 <Image
-                  src="/images/rooms/penthouse-main.jpeg"
+                  src="/rooms/penthouse-main.jpeg"
                   alt="Penthouse"
                   fill
                   className="object-cover group-hover:scale-110 transition-transform duration-500"
