@@ -31,7 +31,7 @@ export const BookingConfirmationEmail = ({
   totalPrice,
   bookingId,
   // Valeur par défaut si non fournie (à remplacer par ton vrai domaine Vercel plus tard)
-  baseUrl = "https://ton-projet-vercel.app", 
+  baseUrl = "https://hotel-booking-pi-azure.vercel.app/", 
 }: BookingConfirmationEmailProps) => (
   <Html>
     <Head />
