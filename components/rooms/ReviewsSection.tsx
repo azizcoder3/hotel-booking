@@ -70,45 +70,6 @@ export default function ReviewsSection({ roomId, reviews }: ReviewsSectionProps)
       </div>
 
       {/* Liste des avis */}
-      {/* <div className="space-y-8 mb-12">
-        {reviews.length === 0 ? (
-            <p className="text-gray-500 italic">Aucun avis pour le moment. Soyez le premier !</p>
-        ) : (
-            reviews.map((review) => {
-              const userName = getUserName(review)
-              return (
-                <div key={review.id} className="flex gap-4">
-                    <div className="shrink-0">
-                        <div className="h-10 w-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">
-                            {userName[0].toUpperCase()}
-                        </div>
-                    </div>
-                    <div>
-                        <div className="flex items-center gap-2 mb-1">
-                            <span className="font-semibold text-gray-900">
-                                {userName}
-                            </span>
-                            <div className="flex">
-                                {[...Array(5)].map((_, i) => (
-                                    <Star 
-                                        key={i} 
-                                        className={`h-3 w-3 ${i < review.rating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'}`} 
-                                    />
-                                ))}
-                            </div>
-                        </div>
-                        <p className="text-xs text-gray-400 mb-2">
-                            {new Date(review.created_at).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
-                        </p>
-                        <p className="text-gray-600 leading-relaxed text-sm">
-                            {review.comment}
-                        </p>
-                    </div>
-                </div>
-              )
-            })
-        )}
-      </div> */}
       <div className="space-y-8 mb-12">
         {reviews.length === 0 ? (
             <p className="text-gray-500 italic">Aucun avis pour le moment. Soyez le premier !</p>

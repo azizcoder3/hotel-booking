@@ -1,37 +1,49 @@
-// components/rooms/RoomCard.tsx
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { Users, Wifi, ArrowRight } from 'lucide-react'
+import { useCurrency } from '@/components/providers/CurrencyContext'
 
-// On définit le type des données qu'on reçoit de Supabase
+// Définition propre du Type Chambre (au lieu de any)
+interface Room {
+  id: string
+  name: string
+  slug: string
+  description: string
+  price_per_night: number
+  capacity: number
+  image_url: string | null
+  amenities: string[] | null
+}
+
 interface RoomProps {
-  room: {
-    id: string
-    name: string
-    slug: string
-    description: string
-    price_per_night: number
-    capacity: number
-    image_url: string | null
-    amenities: string[] | null
-  }
+  room: Room
 }
 
 export default function RoomCard({ room }: RoomProps) {
+  const { formatPrice } = useCurrency()
+  const searchParams = useSearchParams()
+
+  // On récupère les paramètres actuels (dates, adultes...) pour les passer à la page suivante
+  const currentQuery = searchParams.toString() 
+  const href = `/rooms/${room.slug}${currentQuery ? `?${currentQuery}` : ''}`
+
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:shadow-xl border border-gray-100">
       
       {/* Image */}
       <div className="relative h-64 overflow-hidden">
         <Image
-          src={room.image_url || '/placeholder.jpeg'}
+          src={room.image_url || '/placeholder.jpg'}
           alt={room.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute top-4 right-4 rounded-full bg-white/90 px-3 py-1 text-sm font-bold text-indigo-600 backdrop-blur-sm shadow-sm">
-          {room.price_per_night}€ <span className="font-normal text-gray-500">/nuit</span>
+          {formatPrice(room.price_per_night)} <span className="font-normal text-gray-500">/nuit</span>
         </div>
       </div>
 
@@ -61,9 +73,9 @@ export default function RoomCard({ room }: RoomProps) {
           )}
         </div>
 
-        {/* Bouton */}
+        {/* Bouton avec lien dynamique */}
         <Link
-          href={`/rooms/${room.slug}`}
+          href={href}
           className="mt-6 flex w-full items-center justify-center rounded-lg bg-indigo-50 px-4 py-2.5 text-sm font-semibold text-indigo-600 transition-colors hover:bg-indigo-600 hover:text-white group-hover:bg-indigo-600 group-hover:text-white"
         >
           Voir les détails <ArrowRight className="ml-2 h-4 w-4" />

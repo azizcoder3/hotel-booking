@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"; // On utilise une police Google propre
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import { CurrencyProvider } from '@/components/providers/CurrencyContext'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
   return (
     <html lang="fr" className="h-full">
       <body className={`${inter.className} flex min-h-screen flex-col`}>
+         <CurrencyProvider> {/* <--- ON ENVELOPPE TOUT ICI */}
         {/* Le Header sera visible sur toutes les pages */}
         <Header />
         
@@ -30,6 +32,7 @@ export default function RootLayout({
 
         {/* Le Footer sera visible sur toutes les pages */}
         <Footer />
+        </CurrencyProvider> {/* <--- FIN */}
       </body>
     </html>
   )

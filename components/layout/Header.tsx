@@ -2,6 +2,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { ChevronDown, User, LogOut } from 'lucide-react'
+import CurrencySwitcher from './CurrencySwitcher'
 
 export default async function Header() {
   const supabase = await createClient()
@@ -70,6 +71,11 @@ export default async function Header() {
           <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-indigo-600 transition-colors">
             Contact
           </Link>
+
+          {/* Sélecteur de Devise */}
+          <div className="mr-4 hidden md:block">
+              <CurrencySwitcher />
+          </div>
           
           {/* Section Droite : Auth & Réservation */}
           <div className="flex items-center gap-4 pl-4 border-l border-gray-200">

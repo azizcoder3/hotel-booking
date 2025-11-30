@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { Calendar, MapPin, Clock, LogOut } from 'lucide-react'
 import { cancelBooking } from '@/app/actions/bookingActions'
+import PriceDisplay from '@/components/ui/PriceDisplay'
 
 // Fonction utilitaire pour formater les dates
 const formatDate = (dateString: string) => {
@@ -157,7 +158,7 @@ export default async function DashboardPage() {
                     <div className="flex justify-between items-end mt-6 pt-4 border-t border-gray-50">
                       <div>
                         <span className="text-xs text-gray-400 uppercase">Prix Total</span>
-                        <p className="text-xl font-bold text-gray-900">{booking.total_price}€</p>
+                        <p className="text-xl font-bold text-gray-900"><PriceDisplay amount={booking.total_price} /></p>
                       </div>
                       
                       {booking.rooms && (
