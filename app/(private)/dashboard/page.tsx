@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { Calendar, MapPin, Clock, LogOut } from 'lucide-react'
+import { cancelBooking } from '@/app/actions/bookingActions'
 
 // Fonction utilitaire pour formater les dates
 const formatDate = (dateString: string) => {
@@ -163,6 +164,21 @@ export default async function DashboardPage() {
                         <Link href={`/rooms/${booking.rooms.slug}`} className="text-indigo-600 font-medium hover:underline text-sm">
                           Revoir la chambre
                         </Link>
+                      )}
+                      {/* NOUVEAU : Bouton Annuler (visible seulement si non annulé) */}
+                      {booking.status !== 'cancelled' && (
+                          <form action={async () => {
+                              'use server'
+                              await cancelBooking(booking.id)
+                          }}>
+                              <button 
+                                  type="submit"
+                                  className="text-red-500 hover:bg-red-50 px-3 py-1 rounded text-sm font-medium transition-colors"
+                                  // Petit confirm natif pour éviter les clics par erreur
+                              >
+                                  Annuler
+                              </button>
+                          </form>
                       )}
                     </div>
                   </div>

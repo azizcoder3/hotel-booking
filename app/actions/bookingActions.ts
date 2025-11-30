@@ -185,3 +185,51 @@ export async function createBooking(formData: FormData) {
   revalidatePath('/dashboard')
   return { success: true }
 }
+
+// --- NOUVELLE FONCTION : ANNULATION ---
+export async function cancelBooking(bookingId: string) {
+  const supabase = await createClient()
+
+  // 1. Vérif Auth
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { error: "Non connecté" }
+
+  // 2. Vérifier que la réservation appartient bien à l'utilisateur
+  // et qu'elle n'est pas déjà annulée
+  const { data: booking, error: fetchError } = await supabase
+    .from('bookings')
+    .select('status, start_date')
+    .eq('id', bookingId)
+    .eq('user_id', user.id)
+    .single()
+
+  if (fetchError || !booking) {
+    return { error: "Réservation introuvable." }
+  }
+
+  if (booking.status === 'cancelled') {
+    return { error: "Cette réservation est déjà annulée." }
+  }
+
+  // 3. Règle métier : Annulation possible jusqu'à 48h avant ?
+  // Pour le MVP, on autorise tout, mais on pourrait bloquer ici.
+
+  // 4. Mettre à jour le statut
+  const { error: updateError } = await supabase
+    .from('bookings')
+    .update({ status: 'cancelled' }) // On passe en annulé
+    .eq('id', bookingId)
+
+  if (updateError) {
+    return { error: "Erreur lors de l'annulation." }
+  }
+
+  // NOTE SUR LE REMBOURSEMENT :
+  // Comme tu n'as pas de système de paiement en ligne (Stripe), le remboursement est "Manuel".
+  // Si le statut était "paid", tu verras dans ton admin que la réservation est "Annulée" mais "Payé".
+  // C'est à toi (Admin) de rembourser le client par virement/espèces.
+  // Tu pourras ensuite passer le statut paiement à "unpaid" ou "refunded" via Supabase.
+
+  revalidatePath('/dashboard')
+  return { success: true }
+}

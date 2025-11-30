@@ -4,51 +4,48 @@ import Image from "next/image";
 import { Star, Wifi, Coffee, MapPin, ArrowRight } from "lucide-react";
 import ServicesSlider from "@/components/home/ServicesSlider";
 import PackagesSection from "@/components/home/PackagesSection";
+import HeroSearchForm from "@/components/home/HeroSearchForm";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       
-      {/* 1. HERO SECTION (Grande image d'accueil) */}
-      <section className="relative h-[85vh] flex items-center justify-center">
-        {/* Image de fond assombrie */}
+      {/* 1. HERO SECTION */}
+      {/* J'ai ajouté 'pb-16 md:pb-32' pour faire de la place à la barre de recherche qui dépasse */}
+      <section className="relative h-[90vh] flex flex-col justify-center items-center pb-16 md:pb-32">
+        
+        {/* Image de fond */}
         <div className="absolute inset-0 z-0">
           <Image
             src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=2070&auto=format&fit=crop"
             alt="Vue magnifique de l'hôtel"
             fill
-            className="object-cover brightness-[0.60]" // brightness assombrit l'image pour lire le texte
+            className="object-cover brightness-[0.60]"
             priority
           />
         </div>
 
         {/* Contenu Texte */}
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <span className="text-indigo-400 font-semibold tracking-wider uppercase text-sm mb-4 block">
+        <div className="relative z-10 text-center px-4 max-w-5xl mx-auto mt-auto mb-auto">
+          <span className="text-indigo-400 font-bold tracking-[0.2em] uppercase text-sm mb-6 block animate-fade-in">
             Bienvenue au paradis
           </span>
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            L&apos;élégance ultime au cœur de <br />
-            <span className="text-indigo-400">Miami</span>
+          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-8 leading-tight drop-shadow-lg">
+            L&apos;élégance ultime au <br />
+            cœur de <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-400 to-cyan-400">Miami</span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-200 mb-10 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-100 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
             Découvrez un havre de paix où le luxe rencontre le confort. Profitez d&apos;une expérience inoubliable avec nos services 5 étoiles.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              href="/rooms"
-              className="px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-full transition-all transform hover:scale-105 shadow-lg"
-            >
-              Voir les chambres
-            </Link>
-            <Link
-              href="/contact"
-              className="px-8 py-4 bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm border border-white/30 font-semibold rounded-full transition-all"
-            >
-              Nous contacter
-            </Link>
-          </div>
+          
+          {/* ANCIENS BOUTONS SUPPRIMÉS ICI */}
         </div>
+
+        {/* BARRE DE RECHERCHE (Positionnée en bas) */}
+        <div className="relative z-20 w-full px-4 mt-auto mb-12">
+            <HeroSearchForm />
+        </div>
+
       </section>
 
       {/* 2. NOS ATOUTS (Features) */}
