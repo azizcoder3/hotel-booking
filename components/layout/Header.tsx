@@ -53,7 +53,10 @@ export default async function Header() {
                 🍽️ Restaurant
               </Link>
               <Link href="/services/wellness" className="rounded-lg px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
-                💆 Bien-être & Spa
+                💍 Bien etre & spa
+              </Link>
+              <Link href="/services/events" className="rounded-lg px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
+                💍 Mariages & Fêtes
               </Link>
               <Link href="/services/pool" className="rounded-lg px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 hover:text-indigo-600">
                 🏊 Piscine

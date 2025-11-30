@@ -1,5 +1,6 @@
-import { createClient } from '@/lib/supabase/server'
-import RoomCard from '@/components/rooms/RoomCard'
+import { createClient } from '@/lib/supabase/server';
+import RoomCard from '@/components/rooms/RoomCard';
+import PackagesSection from "@/components/home/PackagesSection";
 
 export const metadata = {
   title: 'Nos Chambres - LuxeHotel',
@@ -44,6 +45,11 @@ export default async function RoomsPage() {
             <p className="text-center text-gray-500 mt-10">Aucune chambre disponible pour le moment.</p>
         )}
       </div>
+
+      <div>
+        <PackagesSection />
+      </div>        
+      
     </div>
   )
 }
