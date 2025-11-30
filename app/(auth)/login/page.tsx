@@ -17,18 +17,19 @@ export default function LoginPage() {
         
         <form className="mt-8 space-y-6" action={login}>
           <div className="-space-y-px rounded-md shadow-sm">
+            {/* Email ou Identifiant */}
             <div>
               <label htmlFor="email-address" className="sr-only">
-                Adresse email
+                Adresse email ou Identifiant
               </label>
               <input
                 id="email-address"
                 name="email"
-                type="email"
-                autoComplete="email"
+                type="text" // <--- IMPORTANT : "text" au lieu de "email"
+                autoComplete="username"
                 required
                 className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 px-3"
-                placeholder="Adresse email"
+                placeholder="Email ou identifiant (ex: admin)"
               />
             </div>
             <div>
