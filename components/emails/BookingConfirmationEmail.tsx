@@ -43,8 +43,8 @@ export const BookingConfirmationEmail = ({
         <Section style={logoSection}>
           <Img
             src={`${baseUrl}/logo.png`} // Cela va chercher public/logo.png
-            width="150"
-            height="50"
+            width="220"
+            height="auto"
             alt="LuxeHotel"
             style={logoImage}
           />
@@ -116,7 +116,7 @@ const logoSection = {
 const logoImage = {
   margin: "0 auto",
   display: "block",
-  objectFit: "contain" as const,
+  maxWidth: "100%", 
 };
 
 const h1 = {
