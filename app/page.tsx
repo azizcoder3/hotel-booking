@@ -5,6 +5,7 @@ import { Star, Wifi, Coffee, MapPin, ArrowRight } from "lucide-react";
 import ServicesSlider from "@/components/home/ServicesSlider";
 import PackagesSection from "@/components/home/PackagesSection";
 import HeroSearchForm from "@/components/home/HeroSearchForm";
+import PriceDisplay from "@/components/ui/PriceDisplay";
 
 export default function Home() {
   return (
@@ -121,7 +122,12 @@ export default function Home() {
                       <span className="text-sm text-gray-500 ml-1">4.9 (120 avis)</span>
                     </div>
                   </div>
-                  <span className="text-xl font-bold text-indigo-600">250€<span className="text-sm text-gray-500 font-normal">/nuit</span></span>
+                  {/* Carte 1 : Suite Deluxe */}
+                  {/* Remplacer : <span className="text-xl font-bold text-indigo-600">250€<span... */}
+                  <span className="text-xl font-bold text-indigo-600">
+                    <PriceDisplay amount={250} />
+                    <span className="text-sm text-gray-500 font-normal">/nuit</span>
+                  </span>
                 </div>
                 <p className="text-gray-600 text-sm mb-6 line-clamp-2">
                   Une suite spacieuse avec vue sur l&apos;océan, lit King Size et salle de bain en marbre.
@@ -152,7 +158,12 @@ export default function Home() {
                       <span className="text-sm text-gray-500 ml-1">4.7 (85 avis)</span>
                     </div>
                   </div>
-                  <span className="text-xl font-bold text-indigo-600">140€<span className="text-sm text-gray-500 font-normal">/nuit</span></span>
+                  {/* Carte 2 : Chambre Double */}
+                  {/* Remplacer : 140€ */}
+                  <span className="text-xl font-bold text-indigo-600">
+                    <PriceDisplay amount={140} />
+                    <span className="text-sm text-gray-500 font-normal">/nuit</span>
+                  </span>
                 </div>
                 <p className="text-gray-600 text-sm mb-6 line-clamp-2">
                   Parfaite pour les couples, avec tout le confort nécessaire et un balcon privé.
@@ -183,7 +194,12 @@ export default function Home() {
                       <span className="text-sm text-gray-500 ml-1">5.0 (24 avis)</span>
                     </div>
                   </div>
-                  <span className="text-xl font-bold text-indigo-600">550€<span className="text-sm text-gray-500 font-normal">/nuit</span></span>
+                  {/* Carte 3 : Penthouse */}
+                  {/* Remplacer : 550€ */}
+                  <span className="text-xl font-bold text-indigo-600">
+                    <PriceDisplay amount={550} />
+                    <span className="text-sm text-gray-500 font-normal">/nuit</span>
+                  </span>
                 </div>
                 <p className="text-gray-600 text-sm mb-6 line-clamp-2">
                   L&apos;expérience ultime. Dernier étage, terrasse panoramique et jacuzzi privé.

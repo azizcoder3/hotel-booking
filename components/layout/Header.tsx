@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { ChevronDown, User, LogOut } from 'lucide-react'
 import CurrencySwitcher from './CurrencySwitcher'
+import MobileMenu from './MobileMenu'
 
 export default async function Header() {
   const supabase = await createClient()
@@ -120,11 +121,7 @@ export default async function Header() {
         </nav>
 
         {/* Menu Mobile */}
-        <div className="md:hidden">
-          <Link href="/rooms" className="p-2 text-gray-700">
-             Menu
-          </Link>
-        </div>
+        <MobileMenu user={user} isAdmin={isAdmin} />
       </div>
     </header>
   )
