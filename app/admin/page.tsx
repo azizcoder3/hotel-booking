@@ -1,3 +1,79 @@
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+import { redirect } from 'next/navigation'
+import { createClient } from '@/lib/supabase/server'
+import AdminDashboardClient from '@/components/admin/AdminDashboardClient'
+
+export default async function AdminDashboard() {
+  const supabase = await createClient()
+
+  // 1. Vérification Auth (Inchangé)
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) redirect('/login')
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('role')
+    .eq('id', user.id)
+    .single()
+
+  if (profile?.role !== 'admin') {
+    return (
+      <div className="flex h-screen items-center justify-center bg-gray-100">
+        <div className="bg-white p-8 rounded-lg shadow-md text-red-600 font-bold">
+          ⛔ Accès interdit : Réservé aux administrateurs.
+        </div>
+      </div>
+    )
+  }
+
+  // 2. Récupération des Données (Admin)
+  const supabaseAdmin = createSupabaseClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
+
+  // A. Les Réservations
+  const { data: bookings } = await supabaseAdmin
+    .from('bookings')
+    .select(`
+      *,
+      rooms ( name ),
+      profiles ( full_name, email, phone )
+    `)
+    .order('created_at', { ascending: false })
+
+  // B. Les Messages (NOUVEAU)
+  const { data: messages } = await supabaseAdmin
+    .from('messages')
+    .select('*')
+    .order('created_at', { ascending: false })
+
+  // 3. Affichage
+  return (
+    <div className="min-h-screen bg-gray-100 py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between mb-8">
+          <h1 className="text-3xl font-bold text-gray-900">Administration Hôtel</h1>
+          <span className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded border border-indigo-400">
+            Mode Administrateur
+          </span>
+        </div>
+        
+        {/* On passe les bookings ET les messages */}
+        <AdminDashboardClient 
+            bookings={bookings || []} 
+            messages={messages || []} 
+        />
+      </div>
+    </div>
+  )
+}
+
+
+
+
+
+
 // import { redirect } from 'next/navigation'
 // import { createClient } from '@/lib/supabase/server'
 // import { createClient as createSupabaseClient } from '@supabase/supabase-js'
@@ -184,67 +260,69 @@
 //   )
 // }
 
-import { createClient as createSupabaseClient } from '@supabase/supabase-js'
-import { redirect } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
-import AdminDashboardClient from '@/components/admin/AdminDashboardClient'
 
-export default async function AdminDashboard() {
-  // 1. Client Standard : Pour vérifier TON identité à toi
-  const supabase = await createClient()
 
-  // Vérification : Est-ce que tu es connecté ?
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) redirect('/login')
+// import { createClient as createSupabaseClient } from '@supabase/supabase-js'
+// import { redirect } from 'next/navigation'
+// import { createClient } from '@/lib/supabase/server'
+// import AdminDashboardClient from '@/components/admin/AdminDashboardClient'
 
-  // Vérification : Est-ce que tu es Admin ?
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('role')
-    .eq('id', user.id)
-    .single()
+// export default async function AdminDashboard() {
+//   // 1. Client Standard : Pour vérifier TON identité à toi
+//   const supabase = await createClient()
 
-  if (profile?.role !== 'admin') {
-    return (
-      <div className="flex h-screen items-center justify-center bg-gray-100">
-        <div className="bg-white p-8 rounded-lg shadow-md text-red-600 font-bold">
-          ⛔ Accès interdit : Réservé aux administrateurs.
-        </div>
-      </div>
-    )
-  }
+//   // Vérification : Est-ce que tu es connecté ?
+//   const { data: { user } } = await supabase.auth.getUser()
+//   if (!user) redirect('/login')
 
-  // 2. Client "Service Role" (Mode Dieu) : Pour récupérer TOUTES les données
-  // On utilise ce client spécial pour contourner les règles RLS qui masquaient les noms "Inconnu"
-  const supabaseAdmin = createSupabaseClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY! // Assure-toi que cette clé est dans ton .env.local
-  )
+//   // Vérification : Est-ce que tu es Admin ?
+//   const { data: profile } = await supabase
+//     .from('profiles')
+//     .select('role')
+//     .eq('id', user.id)
+//     .single()
 
-  // On récupère les réservations avec le client Admin
-  const { data: bookings } = await supabaseAdmin
-    .from('bookings')
-    .select(`
-      *,
-      rooms ( name ),
-      profiles ( full_name, email, phone )
-    `)
-    .order('created_at', { ascending: false })
+//   if (profile?.role !== 'admin') {
+//     return (
+//       <div className="flex h-screen items-center justify-center bg-gray-100">
+//         <div className="bg-white p-8 rounded-lg shadow-md text-red-600 font-bold">
+//           ⛔ Accès interdit : Réservé aux administrateurs.
+//         </div>
+//       </div>
+//     )
+//   }
 
-  // 3. Affichage
-  return (
-    <div className="min-h-screen bg-gray-100 py-12">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Administration Hôtel</h1>
-          <span className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded border border-indigo-400">
-            Mode Administrateur
-          </span>
-        </div>
+//   // 2. Client "Service Role" (Mode Dieu) : Pour récupérer TOUTES les données
+//   // On utilise ce client spécial pour contourner les règles RLS qui masquaient les noms "Inconnu"
+//   const supabaseAdmin = createSupabaseClient(
+//     process.env.NEXT_PUBLIC_SUPABASE_URL!,
+//     process.env.SUPABASE_SERVICE_ROLE_KEY! // Assure-toi que cette clé est dans ton .env.local
+//   )
+
+//   // On récupère les réservations avec le client Admin
+//   const { data: bookings } = await supabaseAdmin
+//     .from('bookings')
+//     .select(`
+//       *,
+//       rooms ( name ),
+//       profiles ( full_name, email, phone )
+//     `)
+//     .order('created_at', { ascending: false })
+
+//   // 3. Affichage
+//   return (
+//     <div className="min-h-screen bg-gray-100 py-12">
+//       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+//         <div className="flex items-center justify-between mb-8">
+//           <h1 className="text-3xl font-bold text-gray-900">Administration Hôtel</h1>
+//           <span className="bg-indigo-100 text-indigo-800 text-xs font-medium px-2.5 py-0.5 rounded border border-indigo-400">
+//             Mode Administrateur
+//           </span>
+//         </div>
         
-        {/* On délègue l'affichage au composant Client */}
-        <AdminDashboardClient bookings={bookings || []} />
-      </div>
-    </div>
-  )
-}
+//         {/* On délègue l'affichage au composant Client */}
+//         <AdminDashboardClient bookings={bookings || []} />
+//       </div>
+//     </div>
+//   )
+// }
