@@ -68,7 +68,7 @@ export default async function ContactPage({
                     <Mail className="h-7 w-6 text-indigo-600" aria-hidden="true" />
                   </dt>
                   <dd>
-                    <a href="mailto:info@luxehotel.com" className="hover:text-indigo-600">info@luxehotel.com</a>
+                    <a href="mailto:vitalgapene@gmail.com" className="hover:text-indigo-600">info@luxehotel.com</a>
                   </dd>
                 </div>
               </dl>
