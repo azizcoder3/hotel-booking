@@ -5,7 +5,7 @@ import { Resend } from 'resend'
 import ContactConfirmationEmail from '@/components/emails/ContactConfirmationEmail'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
-const ADMIN_EMAIL = 'vitalgapene@gmail.com' 
+const ADMIN_EMAIL = 'azizcoder3.0@gmail.com' // J'ai remplacé mon email admin vitalgapene@gmail.com par azizcoder3.0@gmail.com pour des tests, apress je remet mon vrai email
 
 export async function sendContactMessage(formData: FormData) {
   // Ici, on utilise 'supabase', donc l'avertissement va disparaître !
@@ -38,7 +38,7 @@ export async function sendContactMessage(formData: FormData) {
     // A. Au Client
     await resend.emails.send({
       from: 'LuxeHotel <onboarding@resend.dev>',
-      to: [email],
+      to: ['azizcoder3.0@gmail.com'], // j'ai remplacé le mot email sans '' par azizcoder3.0@gmail.com pour des tests, donc il remettre le mot email sans '' apres les tests quand on achetera le domaine
       subject: `Réception de votre demande : ${subject}`,
       react: ContactConfirmationEmail({
         clientName: name,
