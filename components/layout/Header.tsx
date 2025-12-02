@@ -1,5 +1,6 @@
 // components/layout/Header.tsx
 import Link from 'next/link'
+import Image from 'next/image'
 import { createClient } from '@/lib/supabase/server'
 import { ChevronDown, User, LogOut } from 'lucide-react'
 import CurrencySwitcher from './CurrencySwitcher'
@@ -26,11 +27,26 @@ export default async function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex h-15 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="/" className="text-2xl font-bold text-indigo-900 tracking-tight">
-            LuxeHotel
+          <Link href="/" className="flex items-center gap-2 group">
+            {/* L'image du logo */}
+            <div className="relative h-16 w-16 md:h-30 md:w-30 transition-transform group-hover:scale-110">
+              <Image
+                src="/logo-luxe.png" // Assure-toi que logo.png est bien dans le dossier public/
+                alt="Logo LuxeHotel"
+                fill
+                className="object-contain"
+                priority // Charge l'image en priorité pour le LCP (SEO)
+                //sizes="(max-width: 768px) 48px, 64px"  Optimisation pour Google
+              />
+            </div>
+            
+            {/* Le Texte */}
+            {/* <span className="text-xl md:text-2xl font-bold text-indigo-900 tracking-tight">
+              LuxeHotel
+            </span> */}
           </Link>
         </div>
 
